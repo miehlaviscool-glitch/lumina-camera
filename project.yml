@@ -1,0 +1,39 @@
+name: Lumina
+options:
+  bundleIdPrefix: com.lumina
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+targets:
+  Lumina:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+    info:
+      path: Config/Info.plist
+      properties:
+        CFBundleDisplayName: Lumina
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIRequiredDeviceCapabilities:
+          - arm64
+        ITSAppUsesNonExemptEncryption: false
+        NSCameraUsageDescription: Lumina needs the camera to take photos and videos.
+        NSMicrophoneUsageDescription: Lumina records audio with your videos and Live Photos.
+        NSPhotoLibraryAddUsageDescription: Lumina saves your photos and videos to your library.
+        NSPhotoLibraryUsageDescription: Lumina shows your latest photo and lets you edit photos from your library.
+        NSLocationWhenInUseUsageDescription: Lumina can tag your photos with where they were taken.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lumina.camera
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO

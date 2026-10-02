@@ -1,0 +1,9 @@
+Lumina.xcodeproj/
+Config/Info.plist
+build/
+build.log
+Payload/
+*.ipa
+Sources/Assets.xcassets/AppIcon.appiconset/icon.png
+.DS_Store
+xcuserdata/
