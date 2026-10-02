@@ -154,9 +154,15 @@ final class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
         var data = [Float](repeating: 0, count: bins * 4)
         context.render(hist, toBitmap: &data, rowBytes: bins * 4 * MemoryLayout<Float>.size,
                        bounds: CGRect(x: 0, y: 0, width: bins, height: 1), format: .RGBAf, colorSpace: nil)
-        var luma = (0..<bins).map { 0.299 * data[$0 * 4] + 0.587 * data[$0 * 4 + 1] + 0.114 * data[$0 * 4 + 2] }
-        let peak = max(luma.max() ?? 1, 0.0001)
-        luma = luma.map { sqrt($0 / peak) }
+        var luma = [Float](repeating: 0, count: bins)
+        for i in 0..<bins {
+            let r: Float = data[i * 4]
+            let g: Float = data[i * 4 + 1]
+            let b: Float = data[i * 4 + 2]
+            luma[i] = 0.299 * r + 0.587 * g + 0.114 * b
+        }
+        let peak: Float = max(luma.max() ?? 1, 0.0001)
+        for i in 0..<bins { luma[i] = sqrt(luma[i] / peak) }
         DispatchQueue.main.async { self.onHistogram?(luma) }
     }
 
